@@ -35,9 +35,6 @@ class _MapPageState extends State<MapPage> {
     return MaterialApp(
         home: Scaffold(
       backgroundColor: Colors.indigo[950],
-      appBar: AppBar(
-          backgroundColor: Color.fromARGB(15, 255, 255, 255),
-          title: const Text('Bidet Buddy')),
 
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_a_photo_outlined),
