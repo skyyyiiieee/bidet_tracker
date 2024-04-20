@@ -34,7 +34,7 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      backgroundColor: Colors.indigo[950],
+      backgroundColor: Colors.indigo[800],
 
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_a_photo_outlined),
