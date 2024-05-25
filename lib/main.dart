@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:PAID_RESTROOM_TRACKER/pages/login_page.dart';
-import 'package:PAID_RESTROOM_TRACKER/pages/intro_page.dart';
-import 'package:PAID_RESTROOM_TRACKER/pages/signup.dart';
-import 'package:PAID_RESTROOM_TRACKER/pages/map_page.dart';
+import 'package:flutter_button/pages/login_page.dart';
+import 'package:flutter_button/pages/intro_page.dart';
+import 'package:flutter_button/pages/signup.dart';
+import 'package:flutter_button/pages/map_page.dart';
 
 void main() {
   runApp(const Main());
