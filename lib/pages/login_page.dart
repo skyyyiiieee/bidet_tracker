@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_button/components/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
-   LoginPage({
+  LoginPage({
     super.key,
   });
-  
+
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: Colors.indigo[950],
         body: SingleChildScrollView(
@@ -38,14 +37,14 @@ class LoginPage extends StatelessWidget {
                         Text(
                           'Login to your Account',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 16,
                             color: Colors.white,
                           ),
                         ),
                       ])),
 
               const SizedBox(height: 10),
-              
+
               //username
               MyTextfield(
                 controller: usernameController,
@@ -61,7 +60,6 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
                 labelText: 'Password',
               ),
-
 
               const SizedBox(height: 30),
 
@@ -117,7 +115,6 @@ class LoginPage extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 3.0),
                       ),
-
                       GestureDetector(
                         child: const Text("Sign Up",
                             style: TextStyle(fontSize: 15, color: Colors.grey)),
