@@ -13,17 +13,14 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:  const IntroPage(),
-      routes: {
-        '/intropage' : (context) =>  const IntroPage(),
-        '/loginpage' : (context) =>  const LoginPage(),
-        '/sign_up' : (context) =>  const SignUpPage(),
-        '/mappage' : (context) =>  const MapPage(),
-      }
-
-      
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const IntroPage(),
+        routes: {
+          '/intropage': (context) => const IntroPage(),
+          '/loginpage': (context) => LoginPage(),
+          '/sign_up': (context) => SignUpPage(),
+          '/mappage': (context) => const MapPage(),
+        });
   }
 }

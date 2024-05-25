@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/components/my_textfield.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({
+   SignUpPage({
     super.key,
   });
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,92 +50,29 @@ class SignUpPage extends StatelessWidget {
               const SizedBox(height: 15),
 
               //username
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Username',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                      ),
-                      floatingLabelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors
-                            .white, // Change this color to the desired color,
-                      ),
-                      fillColor: Colors.indigo[950],
-                      filled: true,
-                    ),
-                  )),
+              MyTextfield(
+                controller: usernameController,
+                obscureText: true,
+                labelText: 'Username',
+              ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
 
               //password
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                      ),
-                      floatingLabelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors
-                            .white, // Change this color to the desired color,
-                      ),
-                      fillColor: Colors.indigo[950],
-                      filled: true,
-                    ),
-                  )),
+              MyTextfield(
+                controller: passwordController,
+                obscureText: true,
+                labelText: 'Password',
+              ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
 
-                //confirmpassword
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                      ),
-                      floatingLabelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors
-                            .white, // Change this color to the desired color,
-                      ),
-                      fillColor: Colors.indigo[950],
-                      filled: true,
-                    ),
-                  )),
+              //confirm password
+              MyTextfield(
+                controller: passwordController,
+                obscureText: true,
+                labelText: 'Confirm Password',
+              ),
 
               const SizedBox(height: 20),
 
@@ -138,9 +80,9 @@ class SignUpPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     enableFeedback: false,
                     backgroundColor: Colors.black38,
-                    minimumSize: const Size(315, 70),
+                    minimumSize: const Size(310, 70),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(20)),
                     textStyle: const TextStyle(
                       fontSize: 20,
                     )),
