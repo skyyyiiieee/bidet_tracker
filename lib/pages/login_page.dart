@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/components/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({
+   LoginPage({
     super.key,
   });
+  
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
 
     return Scaffold(
         backgroundColor: Colors.indigo[950],
@@ -15,7 +18,6 @@ class LoginPage extends StatelessWidget {
             child: Center(
           child: Column(
             children: <Widget>[
-              //   if(!isKeyboard)
               const SizedBox(height: 100),
 
               //logo
@@ -42,65 +44,24 @@ class LoginPage extends StatelessWidget {
                         ),
                       ])),
 
-              const SizedBox(height: 15),
-
+              const SizedBox(height: 10),
+              
               //username
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Username',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                      ),
-                      floatingLabelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors
-                            .white, // Change this color to the desired color,
-                      ),
-                      fillColor: Colors.indigo[950],
-                      filled: true,
-                    ),
-                  )),
+              MyTextfield(
+                controller: usernameController,
+                obscureText: true,
+                labelText: 'Username',
+              ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
               //password
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      labelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                      ),
-                      floatingLabelStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors
-                            .white, // Change this color to the desired color,
-                      ),
-                      fillColor: Colors.indigo[950],
-                      filled: true,
-                    ),
-                  )),
+              MyTextfield(
+                controller: passwordController,
+                obscureText: true,
+                labelText: 'Password',
+              ),
+
 
               const SizedBox(height: 30),
 
@@ -108,9 +69,9 @@ class LoginPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     enableFeedback: false,
                     backgroundColor: Colors.black38,
-                    minimumSize: const Size(315, 70),
+                    minimumSize: const Size(310, 70),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(20)),
                     textStyle: const TextStyle(
                       fontSize: 20,
                     )),
