@@ -64,8 +64,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/Google_flutter.png
-  - assets/BidetLogo-unscreen.gif
-  - assets/Group_1_1.png
   - assets/PO.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
