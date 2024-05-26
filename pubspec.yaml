@@ -66,6 +66,7 @@ flutter:
   - assets/Google_flutter.png
   - assets/BidetLogo-unscreen.gif
   - assets/Group_1_1.png
+  - assets/PO.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

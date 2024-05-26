@@ -7,14 +7,39 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: Colors.indigo[950],
+          backgroundColor: Colors.grey[800],
           body: Center(
               child: Column(children: <Widget>[
-                const SizedBox(height: 50),
+            const SizedBox(height: 50),
+
+            //logo
+            Image.asset(
+              'assets/PO.gif',
+              width: 500,
+              height: 500,
+            ),
+
+            const SizedBox(height: 10),
+
+            const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    'Login to your Google Account',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+                ])),
+
+            const SizedBox(height: 30),
+
             GestureDetector(
-              child: Image.asset('assets/BidetLogo-unscreen.gif'),
+              child: Image.asset('assets/Google_flutter.png'),
               onTap: () {
-                Navigator.pushNamed(context, '/loginpage');
+                Navigator.pushNamed(context, '/mappage');
               },
             ),
           ]))),
