@@ -306,7 +306,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        padding: EdgeInsets.only(left: 30, right: 30),
+        padding: EdgeInsets.only(left: 20, right: 30),
         child: Column(
           children: [
             Row(
@@ -319,7 +319,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                       child: Container(
                         color: Colors.black12,
                         height: 20,
-                        width: 240,
+                        width: 220,
                       ),
                     ),
                     SizedBox(height: 5),
@@ -328,7 +328,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                       child: Container(
                         color: Colors.black12,
                         height: 20,
-                        width: 180,
+                        width: 170,
                       ),
                     ),
                     SizedBox(height: 5),
@@ -349,7 +349,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 10),
           ],
         ),
       ),
