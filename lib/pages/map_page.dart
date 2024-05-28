@@ -1,10 +1,11 @@
 import 'dart:io';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -14,12 +15,24 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  final Completer<GoogleMapController> _controller = Completer();
+  late String _mapStyleString;
   static const LatLng _pGooglePlex = LatLng(14.247142, 121.13667);
   late GoogleMapController mapController;
   Location _locationController = new Location();
   LatLng? _currentP = null;
   String? _currentAddress;
 
+@override
+void initState() {
+
+  rootBundle.loadString('assets/map_styles.json').then((string) {
+      _mapStyleString = string;
+  });
+  super.initState();
+}
+  
+  
   void setMapStyle() {
     mapController.setMapStyle(
         '[{"featureType": "poi", "stylers": [{ "visibility": "off" }]}]');
@@ -82,6 +95,7 @@ class _MapPageState extends State<MapPage> {
             onMapCreated: (GoogleMapController controller) {
               mapController = controller;
               setMapStyle();
+              mapController.setMapStyle(_mapStyleString);
             },
           ),
           Row(
