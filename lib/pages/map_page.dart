@@ -1,9 +1,10 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'package:flutter/services.dart';
 
 class MapPage extends StatefulWidget {
@@ -14,32 +15,27 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  static const LatLng _pGooglePlex = LatLng(14.303142147986497, 121.07613374318477);
-  late GoogleMapController mapController;
-  Location _locationController = new Location();
-  LatLng? _currentP = null;
-  String? _currentAddress;
-  Set<Marker> _markers = {};
-  BitmapDescriptor? _customMarkerIcon;
   final Completer<GoogleMapController> _controller = Completer();
   late String _mapStyleString;
+  static const LatLng _pGooglePlex = LatLng(14.247142, 121.13667);
+  late GoogleMapController mapController;
+  final Location _locationController = Location();
+  LatLng? _currentP;
+  String? _currentAddress;
 
-  @override
-  void initState() {
-    rootBundle.loadString('assets/map_style.json').then((string) {
+@override
+void initState() {
+
+  rootBundle.loadString('assets/map_style.json').then((string) {
       _mapStyleString = string;
   });
-    // TODO: implement initState
-    super.initState();
-    getLocationUpdates();
-    _loadCustomMarkerIcon();
-  }
-
-  Future<void> _loadCustomMarkerIcon() async {
-    _customMarkerIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(1, 1)),
-      'assets/paid_CR_Tag.png',
-    );
+  super.initState();
+}
+  
+  
+  void setMapStyle() {
+    mapController.setMapStyle(
+        '[{"featureType": "poi", "stylers": [{ "visibility": "off" }]}]');
   }
 
   Future<void> updateCurrentAddress() async {
@@ -81,79 +77,14 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    if (_currentP != null) {
-      print(_currentP);
-      _markers.add(
-        Marker(
-          markerId: const MarkerId('User Location'),
-          position: _currentP!,
-        ),
-      );
-    }
-
-    var markers = {
-      Marker(
-        markerId: const MarkerId('1'),
-        position: LatLng(14.315468626815898, 121.07064669023518),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-
-      ),
-      Marker(
-        markerId: const MarkerId('2'),
-        position: LatLng(14.356239417708707, 121.04451720560752),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('3'),
-        position: LatLng(14.355059500353084, 121.0442736161414),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('4'),
-        position: LatLng(14.33120930591894, 121.06947036325884),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('5'),
-        position: LatLng(14.31992161435816, 121.1176986169851),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('6'),
-        position: LatLng(14.263368532549292, 121.04213554806316),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('7'),
-        position: LatLng(14.247512370849535, 121.06340147747518),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('8'),
-        position: LatLng(14.247352099793037, 121.06342553348516),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-      Marker(
-        markerId: const MarkerId('9'),
-        position: LatLng(14.169189623465543, 121.14310662338366),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-       Marker(
-        markerId: const MarkerId('10'),
-        position: LatLng(14.293578936541783, 121.07870252060286),
-        icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
-      ),
-    };
-
-     _markers.addAll(markers);
-
     return MaterialApp(
         theme: ThemeData(
             elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: const CircleBorder(),
+                    backgroundColor: Colors.white,
+                    shape: const CircleBorder(
+                      
+                    ),
                     minimumSize: const Size(55, 55)))),
         home: Scaffold(
             body: Stack(children: [
@@ -165,9 +96,9 @@ class _MapPageState extends State<MapPage> {
             zoomControlsEnabled: false, // Disable zoom in and zoom out buttons
             onMapCreated: (GoogleMapController controller) {
               mapController = controller;
+              setMapStyle();
               mapController.setMapStyle(_mapStyleString);
             },
-            markers: _markers,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -184,17 +115,12 @@ class _MapPageState extends State<MapPage> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       enableFeedback: false,
-                      backgroundColor: Colors.white,
-
+                      backgroundColor: Colors.grey[800],
                       minimumSize: const Size(115, 50),
                       shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: const BorderSide(
-                        color: Colors.purple, // Set the border color
-                        width: 4.0, // Set the border width
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                    ),
-                      foregroundColor: Colors.purple,
+                      foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                         fontSize: 16,
                       ),
@@ -213,22 +139,22 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-    _serviceEnabled = await _locationController.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
-      if (!_serviceEnabled) {
+    serviceEnabled = await _locationController.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await _locationController.requestService();
+      if (!serviceEnabled) {
         print('Location services disabled.');
         return;
       }
     }
 
-    _permissionGranted = await _locationController.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await _locationController.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         print('Location permission denied.');
         return;
       }
@@ -396,7 +322,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        padding: EdgeInsets.only(left: 20, right: 30),
+        padding: const EdgeInsets.only(left: 20, right: 30),
         child: Column(
           children: [
             Row(
@@ -412,7 +338,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                         width: 220,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15.0),
                       child: Container(
@@ -421,25 +347,25 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                         width: 170,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                   ],
                 ),
-                SizedBox(width: 30),
+                const SizedBox(width: 30),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(70),
                   child: Container(
+                    color: Colors.black12,
+                    height: 60,
+                    width: 60,
                     child: const Icon(
                       Icons.directions,
                       size: 30,
                     ),
-                    color: Colors.black12,
-                    height: 60,
-                    width: 60,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
