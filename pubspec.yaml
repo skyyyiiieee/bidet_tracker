@@ -65,6 +65,10 @@ flutter:
   assets:
   - assets/Google_flutter.png
   - assets/PO.gif
+  - assets/paid_CR_Tag.png
+  - assets/map_style.json
+  - assets/background.jpg
+  - assets/Loading.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

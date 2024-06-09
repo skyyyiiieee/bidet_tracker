@@ -7,42 +7,60 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: Colors.grey[800],
-          body: Center(
-              child: Column(children: <Widget>[
-            const SizedBox(height: 50),
-
-            //logo
-            Image.asset(
-              'assets/PO.gif',
-              width: 500,
-              height: 500,
+        body: Stack(
+          children: [
+            // Background Image
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/background.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
+            // Foreground content
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(height: 50),
 
-            const SizedBox(height: 10),
+                  // Image
+                  Image.asset(
+                    'assets/PO.gif',
+                    width: 500,
+                    height: 500,
+                  ),
 
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    'Login to your Google Account',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
+                  const SizedBox(height: 10),
+
+                  // Text
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
+                    child: Text(
+                      'Login to your Google Account',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ])),
 
-            const SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
-            GestureDetector(
-              child: Image.asset('assets/Google_flutter.png'),
-              onTap: () {
-                Navigator.pushNamed(context, '/mappage');
-              },
+                  // GestureDetector for the button
+                  GestureDetector(
+                    child: Image.asset('assets/Google_flutter.png'),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/mappage');
+                    },
+                  ),
+                ],
+              ),
             ),
-          ]))),
+          ],
+        ),
+      ),
     );
   }
 }
