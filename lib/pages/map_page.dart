@@ -19,8 +19,8 @@ class _MapPageState extends State<MapPage> {
   late String _mapStyleString;
   static const LatLng _pGooglePlex = LatLng(14.247142, 121.13667);
   late GoogleMapController mapController;
-  Location _locationController = new Location();
-  LatLng? _currentP = null;
+  final Location _locationController = Location();
+  LatLng? _currentP;
   String? _currentAddress;
 
 @override
@@ -137,22 +137,22 @@ void initState() {
   }
 
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-    _serviceEnabled = await _locationController.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
-      if (!_serviceEnabled) {
+    serviceEnabled = await _locationController.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await _locationController.requestService();
+      if (!serviceEnabled) {
         print('Location services disabled.');
         return;
       }
     }
 
-    _permissionGranted = await _locationController.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await _locationController.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         print('Location permission denied.');
         return;
       }
@@ -320,7 +320,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        padding: EdgeInsets.only(left: 20, right: 30),
+        padding: const EdgeInsets.only(left: 20, right: 30),
         child: Column(
           children: [
             Row(
@@ -336,7 +336,7 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                         width: 220,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15.0),
                       child: Container(
@@ -345,25 +345,25 @@ class BottomSheetRecommendationUI extends StatelessWidget {
                         width: 170,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                   ],
                 ),
-                SizedBox(width: 30),
+                const SizedBox(width: 30),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(70),
                   child: Container(
+                    color: Colors.black12,
+                    height: 60,
+                    width: 60,
                     child: const Icon(
                       Icons.directions,
                       size: 30,
                     ),
-                    color: Colors.black12,
-                    height: 60,
-                    width: 60,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
